@@ -1,16 +1,21 @@
 # app_with_local_cache
 
-A new Flutter project.
+APP with local cache
 
-## Getting Started
+## Definitions
 
-This project is a starting point for a Flutter application.
+Exemplo de aplicativo com serviço de cache local com o offline first;
 
-A few resources to get you started if this is your first Flutter project:
+Consiste em:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Verificar se há disponibilidade de Internet no dispositivo do usuário;
+- Armazenar uma cópia no cache local de uma requisição que foi concluída com sucesso no método GET;
+-  Mostrar os dados cacheados caso o usuário não consiga realizar novo GET. Neste item o usuário deve ser avisado que sua conexão está offline.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+- Recursos necessários
+    - Serviço de Local Storage (SharedPreference);
+    - Serviço de Remote Storage (API com Dio);
+    - Serviço de Verificação de Conexão de Internet(Connectivity Plus + Check via Ping);
+    - Injeção de dependência (Provider);
+    - Roteamento (A definir);
