@@ -1,8 +1,8 @@
-import 'package:app_with_local_cache/modules/data/datasource/pokemon_datasource.dart';
-import 'package:app_with_local_cache/modules/data/mapper/pokemon_mapper.dart';
-import 'package:app_with_local_cache/modules/domain/entities/pokemon_entity.dart';
+import 'package:app_with_local_cache/modules/pokemon/data/datasource/pokemon_datasource.dart';
+import 'package:app_with_local_cache/modules/pokemon/data/mapper/pokemon_mapper.dart';
+import 'package:app_with_local_cache/modules/pokemon/domain/entities/pokemon_entity.dart';
 
-class GetPokemonsDatasource implements PokemonDatasource {
+class GetPokemonEndpoint implements PokemonDatasource {
   @override
   Future<List<PokemonEntity>> getPokemons() async {
     final pokemons = pokemonsMock

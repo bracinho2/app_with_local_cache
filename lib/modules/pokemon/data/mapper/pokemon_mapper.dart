@@ -1,4 +1,4 @@
-import 'package:app_with_local_cache/modules/domain/entities/pokemon_entity.dart';
+import 'package:app_with_local_cache/modules/pokemon/domain/entities/pokemon_entity.dart';
 
 class PokemonEntityMapper {
   static PokemonEntity fromMap({required Map<String, dynamic> map}) {

@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'package:app_with_local_cache/modules/core/typedef/typedef.dart';
-import 'package:app_with_local_cache/modules/data/mapper/pokemon_mapper.dart';
-import 'package:app_with_local_cache/modules/domain/entities/pokemon_entity.dart';
-import 'package:app_with_local_cache/modules/domain/interfaces/repository/pokemon_repository.dart';
+import 'package:app_with_local_cache/modules/pokemon/core/typedef/typedef.dart';
+import 'package:app_with_local_cache/modules/pokemon/data/mapper/pokemon_mapper.dart';
+import 'package:app_with_local_cache/modules/pokemon/domain/entities/pokemon_entity.dart';
+import 'package:app_with_local_cache/modules/pokemon/domain/interfaces/repository/pokemon_repository.dart';
 import 'package:dartz/dartz.dart';
 
 import '../services/local_storage/local_storage.dart';

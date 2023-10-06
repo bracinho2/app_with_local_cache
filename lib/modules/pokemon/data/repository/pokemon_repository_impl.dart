@@ -1,5 +1,5 @@
-import 'package:app_with_local_cache/modules/core/typedef/typedef.dart';
-import 'package:app_with_local_cache/modules/data/datasource/pokemon_datasource.dart';
+import 'package:app_with_local_cache/modules/pokemon/core/typedef/typedef.dart';
+import 'package:app_with_local_cache/modules/pokemon/data/datasource/pokemon_datasource.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../domain/interfaces/repository/pokemon_repository.dart';
