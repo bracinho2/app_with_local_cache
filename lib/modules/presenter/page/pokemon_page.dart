@@ -1,3 +1,4 @@
+import 'package:app_with_local_cache/modules/presenter/state/pokemon_state.dart';
 import 'package:app_with_local_cache/modules/presenter/store/pokemon_store.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class PokemonPage extends StatefulWidget {
 
 class _PokemonPageState extends State<PokemonPage> {
   PokemonStore get _store => widget.store;
-  
+
   @override
   void initState() {
     _store.init();
@@ -24,12 +25,35 @@ class _PokemonPageState extends State<PokemonPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text(
-          'Pokemon Page',
-        ),
-      ),
+    return ValueListenableBuilder(
+      valueListenable: _store,
+      builder: (context, state, _) {
+        if (state is PokemonLoadingState) {
+          return const Scaffold(
+            body: Center(
+              child: LinearProgressIndicator(),
+            ),
+          );
+        }
+
+        if (state is PokemonSuccessState) {
+          final pokemons = state.pokemons;
+          return Scaffold(
+            body: ListView.builder(
+              itemCount: pokemons.length,
+              itemBuilder: (context, index) {
+                final item = pokemons[index];
+
+                return ListTile(
+                  title: Text(item.name),
+                );
+              },
+            ),
+          );
+        }
+
+        return const SizedBox.shrink();
+      },
     );
   }
 }

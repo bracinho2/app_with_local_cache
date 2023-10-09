@@ -7,7 +7,7 @@ class GetPokemons implements GetPokemonsUsecase {
 
   GetPokemons(this._repository);
   @override
-  Future<GetPokemonResult> getPokemons() async {
+  Future<GetPokemonResult> call() async {
     return await _repository.getPokemons();
   }
 }

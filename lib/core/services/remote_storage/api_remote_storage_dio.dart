@@ -9,7 +9,7 @@ class ApiRemoteStorageDio implements ApiRemoteStorage {
 
   ApiRemoteStorageDio(this._dio) {
     _dio.options.baseUrl =
-        'https://pokeapi.co/api/v2/pokemon?limit=2&offset=200';
+        'https://pokeapi.co/api/v2';
   }
 
   @override

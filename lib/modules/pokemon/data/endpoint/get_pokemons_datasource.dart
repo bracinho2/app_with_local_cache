@@ -1,32 +1,33 @@
 import 'package:app_with_local_cache/modules/pokemon/data/datasource/pokemon_datasource.dart';
 import 'package:app_with_local_cache/modules/pokemon/data/mapper/pokemon_mapper.dart';
+
 import 'package:app_with_local_cache/modules/pokemon/domain/entities/pokemon_entity.dart';
 
+import '../../../../core/services/remote_storage/api_remote_storage.dart';
+
 class GetPokemonEndpoint implements PokemonDatasource {
+  final ApiRemoteStorage _apiRemoteStorage;
+  GetPokemonEndpoint(this._apiRemoteStorage);
   @override
   Future<List<PokemonEntity>> getPokemons() async {
-    final pokemons = pokemonsMock
-        .map(
-          (pokemon) => PokemonEntityMapper.fromMap(
-            map: pokemon,
-          ),
-        )
-        .toList();
-    return pokemons;
+    final response =
+        await _apiRemoteStorage.get(path: '/pokemon?limit=20&offset=200');
+
+    if (response.statusCode == 200 &&
+        (response.data['results'] as List).isNotEmpty) {
+      return PokemonEntityMapper.fromMapList(json: response.data['results']);
+    }
+    return [];
   }
 }
 
 const pokemonsMock = [
   {
-    "uid": "abc",
+    "url": "https://pokeapi.co/api/v2/pokemon/201/",
     "name": "my poke",
   },
   {
-    "uid": "yzd",
+    "url": "https://pokeapi.co/api/v2/pokemon/202/",
     "name": "my poke2",
-  },
-  {
-    "uid": "tyu",
-    "name": "my poke3",
   },
 ];

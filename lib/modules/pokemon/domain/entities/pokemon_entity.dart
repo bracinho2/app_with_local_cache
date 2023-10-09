@@ -1,8 +1,12 @@
 class PokemonEntity {
-  final String uid;
-  final String name;
   PokemonEntity({
-    required this.uid,
+    required this.url,
     required this.name,
   });
+
+  final String url;
+  final String name;
+
+  @override
+  String toString() => 'PokemonEntity(uid: $url, name: $name)';
 }

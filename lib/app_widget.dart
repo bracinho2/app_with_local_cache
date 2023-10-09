@@ -8,11 +8,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'AppWithLocalCache',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: PokemonPage(store: context.read()));
+      debugShowCheckedModeBanner: false,
+      title: 'AppWithLocalCache',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: PokemonPage(
+        store: context.read(),
+      ),
+    );
   }
 }
