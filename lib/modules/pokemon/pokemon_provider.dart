@@ -4,6 +4,9 @@ import 'package:app_with_local_cache/modules/presenter/store/pokemon_store.dart'
 import 'package:dio/dio.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/decorators/pokemon_repository_decorator.dart';
+import '../../core/services/local_storage/local_storage.dart';
+import '../../core/services/local_storage/local_storage_shared_preferences.dart';
 import 'data/datasource/pokemon_datasource.dart';
 import 'data/endpoint/get_pokemons_datasource.dart';
 import 'data/repository/pokemon_repository_impl.dart';
@@ -23,6 +26,12 @@ final pokemonProvider = [
   ),
   Provider<PokemonRepository>(
     create: (context) => PokemonRepositoryImpl(
+      context.read(),
+    ),
+  ),
+  Provider<PokemonRepository>(
+    create: (context) => PokemonCacheRepositoryDecorator(
+      context.read(),
       context.read(),
     ),
   ),

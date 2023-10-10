@@ -8,8 +8,7 @@ class ApiRemoteStorageDio implements ApiRemoteStorage {
   final Dio _dio;
 
   ApiRemoteStorageDio(this._dio) {
-    _dio.options.baseUrl =
-        'https://pokeapi.co/api/v2';
+    _dio.options.baseUrl = 'https://pokeapi.co/api/v2';
   }
 
   @override
@@ -21,7 +20,9 @@ class ApiRemoteStorageDio implements ApiRemoteStorage {
     try {
       final response = await _dio.get(
         path,
-        options: Options(headers: headers),
+        options: Options(
+          headers: headers,
+        ),
         queryParameters: queryParams,
       );
       return ClientResponse(
@@ -52,8 +53,8 @@ class ApiRemoteStorageDio implements ApiRemoteStorage {
       return ClientResponse(
           data: response.data, statusCode: response.statusCode!);
     } on DioException catch (e, s) {
-      log(e.toString());
-      log(s.toString());
+      // log(e.toString());
+      // log(s.toString());
       throw HttpServiceError(message: e.toString(), stackTrace: s);
     }
   }

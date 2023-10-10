@@ -11,7 +11,6 @@ class PokemonRepositoryImpl implements PokemonRepository {
 
   @override
   Future<GetPokemonResult> getPokemons() async {
-    final result = await _datasource.getPokemons();
-    return Right(result);
+    return Right(await _datasource.getPokemons());
   }
 }

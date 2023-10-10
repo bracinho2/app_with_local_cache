@@ -52,12 +52,17 @@ class PokemonCacheRepositoryDecorator extends PokemonRepositoryDecorator {
       key: 'pokemons',
       value: jsonPokemons,
     );
-    print('salvou $pokemons no cache');
+    print('SALVOU NO CACHE: \n $pokemons');
   }
 
   Future<List<PokemonEntity>> _getFromCache() async {
-    final pokemons = jsonDecode(await _localCache.load(key: 'pokemons'));
-    print('recuperou do cache $pokemons');
+    final result = jsonDecode(await _localCache.load(key: 'pokemons'));
+    final pokemons = (result as List)
+        .map(
+          (map) => PokemonEntityMapper.fromMap(map: map),
+        )
+        .toList();
+    print('RECUPEROU DO CACHE: \n $pokemons');
     return pokemons;
   }
 }
