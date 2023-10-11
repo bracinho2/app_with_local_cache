@@ -17,19 +17,6 @@ class LocalStorageSharedPreferences implements LocalStorage {
   }
 
   @override
-  Future<List<String>?> loadMany({required String infoKey}) async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-
-    List<dynamic>? list = sharedPreferences.getStringList(infoKey);
-    if (list != null && list is List<String>) {
-      list = list.cast<String>().toList();
-      return list.toList();
-    } else {
-      return null;
-    }
-  }
-
-  @override
   Future<bool> save({required String key, required value}) async {
     final sharedPreferences = await SharedPreferences.getInstance();
     if (value is String) {
@@ -44,13 +31,6 @@ class LocalStorageSharedPreferences implements LocalStorage {
       return sharedPreferences.setStringList(key, value);
     }
     throw Exception('Value type (${value.runtimeType}) not valid');
-  }
-
-  @override
-  Future<bool> saveMany(
-      {required String infoKey, required List<String> dataList}) async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.setStringList(infoKey, dataList);
   }
 
   @override

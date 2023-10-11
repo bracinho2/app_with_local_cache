@@ -19,8 +19,15 @@ class _PokemonPageState extends State<PokemonPage> {
 
   @override
   void initState() {
-    _store.init();
     super.initState();
+    _store.checkConnection();
+    _store.init();
+  }
+
+  @override
+  void dispose() {
+    _store.cancelCheckConnection();
+    super.dispose();
   }
 
   @override
@@ -39,6 +46,7 @@ class _PokemonPageState extends State<PokemonPage> {
         if (state is PokemonSuccessState) {
           final pokemons = state.pokemons;
           return Scaffold(
+            floatingActionButton: FloatingActionButton(onPressed: () {}),
             body: ListView.builder(
               itemCount: pokemons.length,
               itemBuilder: (context, index) {

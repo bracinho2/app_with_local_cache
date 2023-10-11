@@ -1,12 +1,9 @@
 import 'package:app_with_local_cache/core/services/remote_storage/api_remote_storage.dart';
 import 'package:app_with_local_cache/core/services/remote_storage/api_remote_storage_dio.dart';
 import 'package:app_with_local_cache/modules/presenter/store/pokemon_store.dart';
-import 'package:dio/dio.dart';
-import 'package:provider/provider.dart';
 
+import 'package:provider/provider.dart';
 import '../../core/decorators/pokemon_repository_decorator.dart';
-import '../../core/services/local_storage/local_storage.dart';
-import '../../core/services/local_storage/local_storage_shared_preferences.dart';
 import 'data/datasource/pokemon_datasource.dart';
 import 'data/endpoint/get_pokemons_datasource.dart';
 import 'data/repository/pokemon_repository_impl.dart';
@@ -15,9 +12,6 @@ import 'domain/interfaces/usecase/get_pokemons_usecase.dart';
 import 'domain/usecases/get_pokemons.dart';
 
 final pokemonProvider = [
-  Provider<Dio>(
-    create: (context) => Dio(),
-  ),
   Provider<ApiRemoteStorage>(
     create: (context) => ApiRemoteStorageDio(context.read()),
   ),
@@ -41,6 +35,10 @@ final pokemonProvider = [
     ),
   ),
   ChangeNotifierProvider<PokemonStore>(
-    create: (context) => PokemonStore(context.read()),
+    create: (context) => PokemonStore(
+      context.read(),
+      context.read(),
+      context.read(),
+    ),
   ),
 ];

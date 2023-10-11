@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:app_with_local_cache/modules/pokemon/data/datasource/pokemon_datasource.dart';
 import 'package:app_with_local_cache/modules/pokemon/data/mapper/pokemon_mapper.dart';
 

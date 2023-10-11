@@ -29,54 +29,50 @@ class PokemonCacheRepositoryDecorator extends PokemonRepositoryDecorator {
   Future<GetPokemonResult> getPokemons() async {
     try {
       final result = await super.getPokemons();
-      result.fold(
-        (l) => null,
-        (success) => _saveInCache(success),
-      );
-      return result;
+
+      return result.map(_saveInCache);
     } catch (e) {
       return Right(await _getFromCache());
     }
   }
 
-  _saveInCache(List<PokemonEntity> pokemons) {
-    final jsonPokemons = jsonEncode(pokemons
-        .map(
-          (pokemon) => PokemonEntityMapper.toMap(
-            entity: pokemon,
-          ),
-        )
-        .toList());
+  String _entityToString(List<PokemonEntity> pokemons) {
+    return jsonEncode(
+      pokemons
+          .map(
+            (pokemon) => PokemonEntityMapper.toMap(
+              entity: pokemon,
+            ),
+          )
+          .toList(),
+    );
+  }
 
+  List<PokemonEntity> _saveInCache(List<PokemonEntity> pokemons) {
     _localCache.save(
       key: 'pokemons',
-      value: jsonPokemons,
+      value: _entityToString(pokemons),
     );
+
     print('SALVOU NO CACHE: \n $pokemons');
+
+    return pokemons;
   }
 
   Future<List<PokemonEntity>> _getFromCache() async {
     final result = jsonDecode(await _localCache.load(key: 'pokemons'));
-    final pokemons = (result as List)
+
+    print('RECUPEROU DO CACHE: \n $result');
+
+    return _stringToEntity(result);
+  }
+
+  //Vide Chain of Responsability
+  List<PokemonEntity> _stringToEntity(dynamic result) {
+    return (result as List)
         .map(
           (map) => PokemonEntityMapper.fromMap(map: map),
         )
         .toList();
-    print('RECUPEROU DO CACHE: \n $pokemons');
-    return pokemons;
   }
 }
-
-// class MovieStore {
-//   final MoviesRepository _repository;
-//   MovieStore(this._repository);
-// }
-
-// final _controller = MovieStore(
-//   MovieCacheRepositoryDecorator(
-//     MovieRepositoryImpl(),
-//     MyLocalCacheImpl(),
-//   ),
-// );
-
-
